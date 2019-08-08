@@ -5,7 +5,7 @@ class scnBoot extends Phaser.Scene {
 	}
 	
 	preload () {
-        	this.game.load.image("loading","assets/loading[1].png"); 
+        	this.load.image("loading","assets/loading[1].png"); 
 	}
   
   	create() {
