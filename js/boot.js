@@ -10,6 +10,6 @@ class scnBoot extends Phaser.Scene {
   
   	create() {
 		console.log("%cStarting PhoneGuy (C) Mechanically Separated Software 2019", "color:white; background:red");
-		this.scene.start("scenePreload");
+		this.scene.start("scnPreload");
 	}
 }
