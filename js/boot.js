@@ -4,6 +4,8 @@ boot.Boot = function() {
   this.face = null;
 };
 
+console.log(boot);
+
 boot.Boot.prototype.constructor = boot.Boot;
 
 boot.Boot.prototype = {
@@ -11,8 +13,8 @@ boot.Boot.prototype = {
           this.game.load.image("loading","assets/loading[1].png"); 
 	},
   
-  create: function() {
-    console.log("%cStarting Phreaker (c) Falsehand Games 2019", "color:white; background:red");
+  	create: function() {
+    		console.log("%cStarting PhoneGuy (C) Mechanically Separated Software 2019", "color:white; background:red");
     
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.scale.pageAlignHorizontally = true;
