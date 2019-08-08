@@ -35,6 +35,6 @@ class scnPreload extends Phaser.Scene {
   	
   	create () {
 		console.log("Preload complete");
-		this.scene.start("scenePreTitle");
+		this.scene.start("sceneGameTitle");
 	}
 }
