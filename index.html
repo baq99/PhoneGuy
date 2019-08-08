@@ -23,7 +23,10 @@
               width: 800,
               height: 600,
               parent: 'gameWindow',
-              scene: {scnBoot, scnPreload, scnGameTitle, scnGame}
+              scene: {scnBoot: sceneBoot, 
+                      scnPreload: scenePreload,
+                      scnGameTitle: sceneGameTitle,
+                      scnGame: sceneGame}
             };
             
             var game = new Phaser.Game(config);
