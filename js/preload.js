@@ -1,4 +1,4 @@
-class scnPreload extxends Phaser.Scene {
+class scnPreload extends Phaser.Scene {
 	
 	constructor () {
 		super({ key: 'scenePreload' });
