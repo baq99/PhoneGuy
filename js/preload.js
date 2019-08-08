@@ -31,11 +31,10 @@ class scnPreload extends Phaser.Scene {
 		this.load.image("higher","assets/higher[1].png");
 		this.load.image("lower","assets/lower[1].png");
 		this.load.image("gameover","assets/gameover[1].png");
-		
-		console.log("Preload complete");
 	}
   	
   	create () {
+		console.log("Preload complete");
 		this.scene.start("scenePreTitle");
 	}
 }
