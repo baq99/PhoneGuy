@@ -1,0 +1,22 @@
+body {
+  padding: 0px;
+  margin: 0px;         
+  font-family:Tahoma, sans-serif;
+}
+
+.header {
+  width:80%;
+  margin-left:auto;
+  margin-right:auto;
+  padding:10px;
+  text-align:center;
+  align-content:center;
+}
+
+#gameWindow {
+  width:800px;
+  height:600px;
+  margin-left:auto;
+  margin-right:auto;
+  border:1px solid black;
+}
