@@ -1,10 +1,8 @@
 var config = {
-    //type: Phaser.AUTO,
+    type: Phaser.CANVAS,
+    parent: 'gameWindow',
     width: 800,
     height: 600,
-    title: 'Phreaker',
-    parent: 'gameWindow',
-    canvas,
     physics: {
         default: 'arcade',
         arcade: {
