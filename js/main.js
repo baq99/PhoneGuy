@@ -35,7 +35,8 @@ function preload() {
     // simple coin image
     this.load.image('coin', 'assets/coinGold.png');
     // player animations
-    this.load.atlas('player', 'assets/player.png', 'assets/player.json');
+    //this.load.atlas('player', 'assets/player.png', 'assets/player.json');
+    this.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png', {frameWidth: 64, frameHeight: 64});
 }
 
 function create() {
@@ -77,14 +78,13 @@ function create() {
     // player walk animation
     this.anims.create({
         key: 'walk',
-        frames: this.anims.generateFrameNames('player', {prefix: 'p1_walk', start: 1, end: 11, zeroPad: 2}),
+        frames: this.anims.generateFrameNumbers('player',{start:9,end:12,first:12}),
         frameRate: 10,
-        repeat: -1
     });
     // idle with only one frame, so repeat is not neaded
     this.anims.create({
         key: 'idle',
-        frames: [{key: 'player', frame: 'p1_stand'}],
+        frames: this.anims.generateFrameNumbers('player',{start:0,end:8,first:8}),
         frameRate: 10,
     });
 
