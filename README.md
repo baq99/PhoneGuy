@@ -3,7 +3,7 @@ HTML5 Phaser 3 game where you play as a corded telephone
 
 ## QA / Play Testing
 
-You can access the current build of the game for testing here: https://mhammonde.github.io/PhoneGuy/index.html
+You can access the current build of the game for testing here: https://baq99.github.io/PhoneGuy/index.html
 
 Any bugs found please add them to the bug list on the github repository
 
