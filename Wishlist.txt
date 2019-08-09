@@ -1,0 +1,26 @@
+                                                                                                                                                                   
+                                                                                                                                                                   
+WWWWWWWW                           WWWWWWWW iiii                  hhhhhhh                  LLLLLLLLLLL               iiii                            tttt          
+W::::::W                           W::::::Wi::::i                 h:::::h                  L:::::::::L              i::::i                        ttt:::t          
+W::::::W                           W::::::W iiii                  h:::::h                  L:::::::::L               iiii                         t:::::t          
+W::::::W                           W::::::W                       h:::::h                  LL:::::::LL                                            t:::::t          
+ W:::::W           WWWWW           W:::::Wiiiiiii     ssssssssss   h::::h hhhhh              L:::::L               iiiiiii     ssssssssss   ttttttt:::::ttttttt    
+  W:::::W         W:::::W         W:::::W i:::::i   ss::::::::::s  h::::hh:::::hhh           L:::::L               i:::::i   ss::::::::::s  t:::::::::::::::::t    
+   W:::::W       W:::::::W       W:::::W   i::::i ss:::::::::::::s h::::::::::::::hh         L:::::L                i::::i ss:::::::::::::s t:::::::::::::::::t    
+    W:::::W     W:::::::::W     W:::::W    i::::i s::::::ssss:::::sh:::::::hhh::::::h        L:::::L                i::::i s::::::ssss:::::stttttt:::::::tttttt    
+     W:::::W   W:::::W:::::W   W:::::W     i::::i  s:::::s  ssssss h::::::h   h::::::h       L:::::L                i::::i  s:::::s  ssssss       t:::::t          
+      W:::::W W:::::W W:::::W W:::::W      i::::i    s::::::s      h:::::h     h:::::h       L:::::L                i::::i    s::::::s            t:::::t          
+       W:::::W:::::W   W:::::W:::::W       i::::i       s::::::s   h:::::h     h:::::h       L:::::L                i::::i       s::::::s         t:::::t          
+        W:::::::::W     W:::::::::W        i::::i ssssss   s:::::s h:::::h     h:::::h       L:::::L         LLLLLL i::::i ssssss   s:::::s       t:::::t    tttttt
+         W:::::::W       W:::::::W        i::::::is:::::ssss::::::sh:::::h     h:::::h     LL:::::::LLLLLLLLL:::::Li::::::is:::::ssss::::::s      t::::::tttt:::::t
+          W:::::W         W:::::W         i::::::is::::::::::::::s h:::::h     h:::::h     L::::::::::::::::::::::Li::::::is::::::::::::::s       tt::::::::::::::t
+           W:::W           W:::W          i::::::i s:::::::::::ss  h:::::h     h:::::h     L::::::::::::::::::::::Li::::::i s:::::::::::ss          tt:::::::::::tt
+            WWW             WWW           iiiiiiii  sssssssssss    hhhhhhh     hhhhhhh     LLLLLLLLLLLLLLLLLLLLLLLLiiiiiiii  sssssssssss              ttttttttttt  
+
+List of stuff we want in the PhoneGuy game.
+
+- rotary dial animation for use with a thumb stick or touchscreen.
+- Phone cord collision and follow animation
+- Carry plug mechanic. Leave the phone plug in one place and move around the level to recieve it elsewhere i.e. through a hole in the wall, down a cliff drop etc etc
+- MobileGuy baddies.  I.e. iphone, nokia 3210, Samsung etc etc
+- MobileGuy weaknesses.  I.e. iphone easy to break or shatter, Nokia 3210 drain battery life, Samsung catches fire, etc etc
