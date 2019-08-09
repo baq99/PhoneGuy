@@ -36,7 +36,7 @@ function preload() {
     this.load.image('coin', 'assets/coinGold.png');
     // player animations
     //this.load.atlas('player', 'assets/player.png', 'assets/player.json');
-    this.load.spritesheet('player', 'assests/PhoneGuyAllAnims.png', {frameWidth: 64, frameHeight: 64});
+    this.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png', {frameWidth: 64, frameHeight: 64});
 }
 
 function create() {
