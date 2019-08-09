@@ -78,9 +78,8 @@ function create() {
     // player walk animation
     this.anims.create({
         key: 'walk',
-        frames: this.anims.generateFrameNames('player',{start:9,end:12,zeroPad:12}),
+        frames: this.anims.generateFrameNumbers('player',{start:9,end:12,first:12}),
         frameRate: 10,
-        repeat: -1
     });
     // idle with only one frame, so repeat is not neaded
     this.anims.create({
