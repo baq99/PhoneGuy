@@ -101,7 +101,7 @@ function create() {
     });
 
     kbCursors = this.input.keyboard.createCursorKeys();
-    kbSpace = this.input.keyboard.addKey(Phaser.Keyboard.SPACE);
+    kbSpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     
 
     // set bounds so the camera won't go outside the game world
