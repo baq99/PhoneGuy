@@ -100,7 +100,9 @@ function create() {
         frameRate: 10,
     });
 
-    cursors = this.input.keyboard.createCursorKeys();
+    kbCursors = this.input.keyboard.createCursorKeys();
+    kbSpace = this.input.keyboard.addKey(Phaser.Keyboard.SPACE);
+    
 
     // set bounds so the camera won't go outside the game world
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -129,13 +131,13 @@ function collectCoin(sprite, tile) {
 
 function update(time, delta) {
     //walk
-    if (cursors.left.isDown)
+    if (kbCursors.left.isDown)
     {
         player.body.setVelocityX(-200);
         player.anims.play('walk', true); // walk left
         player.flipX = true; // flip the sprite to the left
     }
-    else if (cursors.right.isDown)
+    else if (kbCursors.right.isDown)
     {
         player.body.setVelocityX(200);
         player.anims.play('walk', true);
@@ -145,13 +147,13 @@ function update(time, delta) {
         player.anims.play('idle', true);
     }
     // jump 
-    if (cursors.up.isDown && player.body.onFloor())
+    if (kbCursors.up.isDown && player.body.onFloor())
     {
         player.anims.play('jump', true);
         player.body.setVelocityY(-500);        
     }
     // attack
-    if (cursors.space.isDown && player.body.onFloor())
+    if (kbSpace.isDown && player.body.onFloor())
     {
         player.body.setVelocityX(0);        
         player.anims.play('attack', true);
