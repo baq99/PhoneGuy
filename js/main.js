@@ -90,13 +90,13 @@ function create() {
     // player jump animation
     this.anims.create({
         key: 'jump',
-        frames: this.anims.generateFrameNumbers('player',{start:21,end:28,first:28}),
+        frames: this.anims.generateFrameNumbers('player',{start:20,end:27,first:27}),
         frameRate: 10,
     });
     // player attack animation
     this.anims.create({
         key: 'attack',
-        frames: this.anims.generateFrameNumbers('player',{start:29,end:41,first:41}),
+        frames: this.anims.generateFrameNumbers('player',{start:28,end:40,first:28}),
         frameRate: 10,
     });
 
