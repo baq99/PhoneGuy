@@ -75,19 +75,30 @@ function create() {
     // will be called    
     this.physics.add.overlap(player, coinLayer);
 
+    // player idle animation
+    this.anims.create({
+        key: 'idle',
+        frames: this.anims.generateFrameNumbers('player',{start:0,end:8,first:8}),
+        frameRate: 10,
+    });
     // player walk animation
     this.anims.create({
         key: 'walk',
         frames: this.anims.generateFrameNumbers('player',{start:9,end:12,first:12}),
         frameRate: 10,
     });
-    // idle with only one frame, so repeat is not neaded
+    // player jump animation
     this.anims.create({
-        key: 'idle',
-        frames: this.anims.generateFrameNumbers('player',{start:0,end:8,first:8}),
+        key: 'jump',
+        frames: this.anims.generateFrameNumbers('player',{start:21,end:28,first:28}),
         frameRate: 10,
     });
-
+    // player attack animation
+    this.anims.create({
+        key: 'attack',
+        frames: this.anims.generateFrameNumbers('player',{start:29,end:41,first:29}),
+        frameRate: 10,
+    });
 
     cursors = this.input.keyboard.createCursorKeys();
 
@@ -117,6 +128,7 @@ function collectCoin(sprite, tile) {
 }
 
 function update(time, delta) {
+    //walk
     if (cursors.left.isDown)
     {
         player.body.setVelocityX(-200);
@@ -136,5 +148,12 @@ function update(time, delta) {
     if (cursors.up.isDown && player.body.onFloor())
     {
         player.body.setVelocityY(-500);        
+        player.anims.play('jump', true);
     }
+    // attack
+    if (cursors.space.isDown && player.body.onFloor())
+    {
+        player.body.setVelocityX(0);        
+        player.anims.play('attack', true);
+    }    
 }
