@@ -96,7 +96,7 @@ function create() {
     // player attack animation
     this.anims.create({
         key: 'attack',
-        frames: this.anims.generateFrameNumbers('player',{start:29,end:41,first:29}),
+        frames: this.anims.generateFrameNumbers('player',{start:29,end:41,first:41}),
         frameRate: 10,
     });
 
@@ -147,8 +147,8 @@ function update(time, delta) {
     // jump 
     if (cursors.up.isDown && player.body.onFloor())
     {
-        player.body.setVelocityY(-500);        
         player.anims.play('jump', true);
+        player.body.setVelocityY(-500);        
     }
     // attack
     if (cursors.space.isDown && player.body.onFloor())
