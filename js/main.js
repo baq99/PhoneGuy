@@ -26,6 +26,7 @@ var cursors;
 var groundLayer, coinLayer;
 var text;
 var score = 0;
+var block;
 
 function preload() {
     // map made with Tiled in JSON format
