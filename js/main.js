@@ -4,11 +4,11 @@ var config = {
     width: 800,
     height: 600,
     physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: {y: 500},
-            debug: false
-        }
+        default: 'matter',
+//        arcade: {
+//            gravity: {y: 500},
+//            debug: false
+//        }
     },
     scene: {
         key: 'main',
@@ -34,6 +34,8 @@ function preload() {
     this.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
     // simple coin image
     this.load.image('coin', 'assets/coinGold.png');
+    // cord image
+    this.load.image('cord', 'assets/cord.png');
     // player animations
     //this.load.atlas('player', 'assets/player.png', 'assets/player.json');
     this.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png', {frameWidth: 64, frameHeight: 64});
@@ -60,16 +62,26 @@ function create() {
     this.physics.world.bounds.height = groundLayer.height;
 
     // create the player sprite    
-    player = this.physics.add.sprite(200, 200, 'player');
+    player = this.matter.add.sprite(200, 200, 'player');
     player.setBounce(0.2); // our player will bounce from items
     player.setCollideWorldBounds(true); // don't go out of the map    
+    player.setMass(500);
     
     // small fix to our player images, we resize the physics body object slightly
-    player.body.setSize(player.width, player.height-8);
+    //player.body.setSize(player.width, player.height-8);
     
     // player will collide with the level tiles 
-    this.physics.add.collider(groundLayer, player);
+    this.matter.add.collider(groundLayer, player);
 
+    //add phone cord
+    y = 150;
+    for (var i=0; i<12; i++) {
+        var cord = this.matter.add.image(400,y,'cord',null,{shape:'rectangle',mass:0.1});
+        this.matter.add.joint(prev,cord,(i===0) ? 90 : 35, 0.4);
+        prev = cord;
+        y += 18;
+    }
+    
     coinLayer.setTileIndexCallback(17, collectCoin, this);
     // when the player overlaps with a tile with index 17, collectCoin 
     // will be called    
