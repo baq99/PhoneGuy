@@ -72,7 +72,7 @@ function create() {
     //player.body.setSize(player.width, player.height-8);
     
     // player will collide with the level tiles 
-    this.matter.add.collider(groundLayer, player);
+    //this.matter.add.collider(groundLayer, player);
 
     //add phone cord
     y = 150;
