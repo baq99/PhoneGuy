@@ -6,7 +6,7 @@ var map;
 var player;
 var spriteFPS = 10;
 var cursors;
-var groundLayer, coinLayer;
+var layer;
 var text;
 var score = 0;
 
@@ -14,13 +14,13 @@ function preload() {
     // map made with Tiled in JSON format
     game.load.tilemap('map', 'assets/map.json',null,Phaser.Tilemap.TILED_JSON);
     // tiles in spritesheet 
-    game.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth:70,frameHeight:70});
+    game.load.spritesheet('tiles', 'assets/tiles.png',70,70);
     // simple coin image
     game.load.image('coin', 'assets/coinGold.png');
     // cord image
     game.load.image('cord', 'assets/cord.png');
     // player animations
-    game.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png', {frameWidth: 64, frameHeight: 64});
+    game.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png',64,64);
 }
 
 function create() {
