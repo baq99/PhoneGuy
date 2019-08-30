@@ -48,10 +48,10 @@ function create() {
     game.camera.follow(player);
     
     //player animations
-    plr.animations.add('idle',[0,1,2,3,4,5,6,7,8], spriteFPS, true); //idle
-    plr.animations.add('walk',[9,10,11,12], spriteFPS, true); //walking
-    plr.animations.add('jump',[20,21,22,23,24,25,26,27], spriteFPS, true); //jumping
-    plr.animations.add('liftRec',[28,29,30,31,32,33,34,35,36,37,38,39,40], spriteFPS, true); //lifting the reciever
+    player.animations.add('idle',[0,1,2,3,4,5,6,7,8], spriteFPS, true); //idle
+    player.animations.add('walk',[9,10,11,12], spriteFPS, true); //walking
+    player.animations.add('jump',[20,21,22,23,24,25,26,27], spriteFPS, true); //jumping
+    player.animations.add('liftRec',[28,29,30,31,32,33,34,35,36,37,38,39,40], spriteFPS, true); //lifting the reciever
 
     kbCursors = game.input.keyboard.createCursorKeys();
     kbSpace = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
