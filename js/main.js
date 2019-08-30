@@ -44,7 +44,7 @@ function create() {
     player.body.bounce.y = 0.2; // our player will bounce from items
     player.body.linearDamping = 1;
     player.body.collideWorldBounds = true; // don't go out of the map    
-
+    player.anchor.setTo(.5,1);
     game.camera.follow(player);
     
     //player animations
@@ -93,12 +93,12 @@ function update() {
     else if (kbCursors.left.isDown) {
         player.body.velocity.x = -200;
         player.play('walk'); // walk left
-        player.flipX = true; // flip the sprite to the left
+        player.scale.x = -1; // flip the sprite to the left
     }
     else if (kbCursors.right.isDown) {
         player.body.velocity.x = 200;
         player.play('walk');
-        player.flipX = false; // use the original sprite looking to the right
+        player.scale.x = 1; // use the original sprite looking to the right
     } else {
         player.body.velocity.x = 0;
         player.play('idle');
