@@ -78,21 +78,25 @@ function collectCoin(sprite, tile) {
     return false;
 }
 
-function update(time, delta) {
+function update() {
+    game.physics.arcade.collide(plater,layer);
+    
+    player.body.velocity.x = 0;
+    
     if (kbCursors.up.isDown && player.body.onFloor())  {
-        player.body.setVelocityY(-50);        
+        player.body.setVelocityY(-200);        
         player.play('jump');
     }
     else if (kbSpace.isDown && player.body.onFloor()) {   
-        player.anims.play('attack', true);
+        player.play('liftRec', true);
     }    
     else if (kbCursors.left.isDown) {
-        player.body.setVelocityX(-20);
+        player.body.setVelocityX(-150);
         player.play('walk'); // walk left
         player.flipX = true; // flip the sprite to the left
     }
     else if (kbCursors.right.isDown) {
-        player.body.setVelocityX(20);
+        player.body.setVelocityX(150);
         player.play('walk');
         player.flipX = false; // use the original sprite looking to the right
     } else {
