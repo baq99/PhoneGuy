@@ -78,12 +78,12 @@ function create() {
     //add phone cord
     var y = 150;
     var prev = block;
-    for (var i=0; i<12; i++) {
-        var cord = this.matter.add.image(400,y,'cord',null,{shape:'rectangle',mass:0.1});
-        this.matter.add.joint(prev,cord,(i===0) ? 90 : 35, 0.4);
-        prev = cord;
-        y += 18;
-    }
+//    for (var i=0; i<12; i++) {
+//        var cord = this.matter.add.image(400,y,'cord',null,{shape:'rectangle',mass:0.1});
+//        this.matter.add.joint(prev,cord,(i===0) ? 90 : 35, 0.4);
+//        prev = cord;
+//        y += 18;
+//    }
     
     coinLayer.setTileIndexCallback(17, collectCoin, this);
     // when the player overlaps with a tile with index 17, collectCoin 
