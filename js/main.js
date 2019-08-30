@@ -4,6 +4,7 @@ var game = new Phaser.Game(800,600,Phaser.CANVAS,'gameWindow',{preload:preload,c
 //set global variables
 var map;
 var player;
+var spriteFPS = 10;
 var cursors;
 var groundLayer, coinLayer;
 var text;
@@ -30,7 +31,7 @@ function create() {
     map = game.add.tilemap('map');
     // tiles for the ground layer
     map.addTilesetImage('tiles','tiles');
-    // the player will collide with this layer
+    // the player will collide with this layer  
     map.setCollisionBetween(0,12);
     // create the ground layer
     layer = map.createLayer('World');    
@@ -45,31 +46,12 @@ function create() {
     player.body.collideWorldBounds = true; // don't go out of the map    
 
     game.camera.follow(player);
-
-    // player idle animation
-    game.anims.create({
-        key: 'idle',
-        frames: game.anims.generateFrameNumbers('player',{start:0,end:8,first:8}),
-        frameRate: 10,
-    });
-    // player walk animation
-    game.anims.create({
-        key: 'walk',
-        frames: game.anims.generateFrameNumbers('player',{start:9,end:12,first:12}),
-        frameRate: 10,
-    });
-    // player jump animation
-    game.anims.create({
-        key: 'jump',
-        frames: game.anims.generateFrameNumbers('player',{start:20,end:27,first:27}),
-        frameRate: 10,
-    });
-    // player attack animation
-    game.anims.create({
-        key: 'attack',
-        frames: game.anims.generateFrameNumbers('player',{start:28,end:40,first:28}),
-        frameRate: 10,
-    });
+    
+    //player animations
+    plr.animations.add('idle',[0,1,2,3,4,5,6,7,8], spriteFPS, true); //idle
+    plr.animations.add('walk',[9,10,11,12], spriteFPS, true); //walking
+    plr.animations.add('jump',[20,21,22,23,24,25,26,27], spriteFPS, true); //jumping
+    plr.animations.add('liftRec',[28,29,30,31,32,33,34,35,36,37,38,39,40], spriteFPS, true); //lifting the reciever
 
     kbCursors = game.input.keyboard.createCursorKeys();
     kbSpace = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -99,22 +81,22 @@ function collectCoin(sprite, tile) {
 function update(time, delta) {
     if (kbCursors.up.isDown && player.body.onFloor())  {
         player.body.setVelocityY(-50);        
-        player.anims.play('jump', true);
+        player.play('jump');
     }
     else if (kbSpace.isDown && player.body.onFloor()) {   
         player.anims.play('attack', true);
     }    
     else if (kbCursors.left.isDown) {
         player.body.setVelocityX(-20);
-        player.anims.play('walk', true); // walk left
+        player.play('walk'); // walk left
         player.flipX = true; // flip the sprite to the left
     }
     else if (kbCursors.right.isDown) {
         player.body.setVelocityX(20);
-        player.anims.play('walk', true);
+        player.play('walk');
         player.flipX = false; // use the original sprite looking to the right
     } else {
         player.body.setVelocityX(0);
-        player.anims.play('idle', true);
+        player.play('idle');
     }
 }
