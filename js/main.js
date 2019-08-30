@@ -88,7 +88,7 @@ function create() {
     coinLayer.setTileIndexCallback(17, collectCoin, this);
     // when the player overlaps with a tile with index 17, collectCoin 
     // will be called    
-    this.matter.add.overlap(player, coinLayer);
+//    this.matter.add.overlap(player, coinLayer);
 
     // player idle animation
     this.anims.create({
