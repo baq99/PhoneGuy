@@ -67,7 +67,7 @@ function create() {
         fill: '#ffffff'
     });
     // fix the text to the camera
-    text.setScrollFactor(0);
+    //text.setScrollFactor(0);
 }
 
 // this function will be called when the player touches a coin
