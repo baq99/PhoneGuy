@@ -4,11 +4,11 @@ var config = {
     width: 800,
     height: 600,
     physics: {
-        default: 'matter',
-//        arcade: {
-//            gravity: {y: 500},
-//            debug: false
-//        }
+        default: 'arcade',
+        arcade: {
+            gravity: {y: 500},
+            debug: false
+        }
     },
     scene: {
         key: 'main',
@@ -26,7 +26,6 @@ var cursors;
 var groundLayer, coinLayer;
 var text;
 var score = 0;
-var block;
 
 function preload() {
     // map made with Tiled in JSON format
@@ -59,36 +58,25 @@ function create() {
     coinLayer = map.createDynamicLayer('Coins', coinTiles, 0, 0);
 
     // set the boundaries of our game world
-    //this.physics.world.bounds.width = groundLayer.width;
-    //this.physics.world.bounds.height = groundLayer.height;
-    this.matter.world.setBounds(0,0,groundLayer.width,groundLayer.height);
+    this.physics.world.bounds.width = groundLayer.width;
+    this.physics.world.bounds.height = groundLayer.height;
     
     // create the player sprite    
-    player = this.matter.add.sprite(200, 200, 'player');
+    player = this.physics.add.sprite(200, 200, 'player');
     player.setBounce(0.2); // our player will bounce from items
-    //player.setCollideWorldBounds(true); // don't go out of the map    
+    player.setCollideWorldBounds(true); // don't go out of the map    
     player.setMass(500);
     
     // small fix to our player images, we resize the physics body object slightly
-    //player.body.setSize(player.width, player.height-8);
+    player.body.setSize(player.width, player.height-8);
     
     // player will collide with the level tiles 
-    //this.matter.add.collider(groundLayer, player);
-
-    //add phone cord
-    var y = 150;
-    var prev = block;
-//    for (var i=0; i<12; i++) {
-//        var cord = this.matter.add.image(400,y,'cord',null,{shape:'rectangle',mass:0.1});
-//        this.matter.add.joint(prev,cord,(i===0) ? 90 : 35, 0.4);
-//        prev = cord;
-//        y += 18;
-//    }
+    this.physics.add.collider(groundLayer, player);
     
     coinLayer.setTileIndexCallback(17, collectCoin, this);
     // when the player overlaps with a tile with index 17, collectCoin 
     // will be called    
-//    this.matter.add.overlap(player, coinLayer);
+    this.physics.add.overlap(player, coinLayer);
 
     // player idle animation
     this.anims.create({
@@ -145,24 +133,24 @@ function collectCoin(sprite, tile) {
 }
 
 function update(time, delta) {
-    if (kbCursors.up.isDown && player.onFloor())  {
-        player.setVelocityY(-50);        
+    if (kbCursors.up.isDown && player.body.onFloor())  {
+        player.body.setVelocityY(-50);        
         player.anims.play('jump', true);
     }
     else if (kbSpace.isDown && player.body.onFloor()) {   
         player.anims.play('attack', true);
     }    
     else if (kbCursors.left.isDown) {
-        player.setVelocityX(-20);
+        player.body.setVelocityX(-20);
         player.anims.play('walk', true); // walk left
         player.flipX = true; // flip the sprite to the left
     }
     else if (kbCursors.right.isDown) {
-        player.setVelocityX(20);
+        player.body.setVelocityX(20);
         player.anims.play('walk', true);
         player.flipX = false; // use the original sprite looking to the right
     } else {
-        player.setVelocityX(0);
+        player.body.setVelocityX(0);
         player.anims.play('idle', true);
     }
 }
