@@ -84,23 +84,23 @@ function update() {
     player.body.velocity.x = 0;
     
     if (kbCursors.up.isDown && player.body.onFloor())  {
-        player.body.setVelocityY(-200);        
+        player.body.velocity.y(-200);        
         player.play('jump');
     }
     else if (kbSpace.isDown && player.body.onFloor()) {   
         player.play('liftRec', true);
     }    
     else if (kbCursors.left.isDown) {
-        player.body.setVelocityX(-150);
+        player.body.velocity.x(-150);
         player.play('walk'); // walk left
         player.flipX = true; // flip the sprite to the left
     }
     else if (kbCursors.right.isDown) {
-        player.body.setVelocityX(150);
+        player.body.velocity.x(150);
         player.play('walk');
         player.flipX = false; // use the original sprite looking to the right
     } else {
-        player.body.setVelocityX(0);
+        player.body.velocity.x(0);
         player.play('idle');
     }
 }
