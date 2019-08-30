@@ -146,19 +146,19 @@ function collectCoin(sprite, tile) {
 
 function update(time, delta) {
     if (kbCursors.up.isDown && player.body.onFloor())  {
-        player.setVelocityY(-500);        
+        player.setVelocityY(-50);        
         player.anims.play('jump', true);
     }
     else if (kbSpace.isDown && player.body.onFloor()) {   
         player.anims.play('attack', true);
     }    
     else if (kbCursors.left.isDown) {
-        player.setVelocityX(-200);
+        player.setVelocityX(-20);
         player.anims.play('walk', true); // walk left
         player.flipX = true; // flip the sprite to the left
     }
     else if (kbCursors.right.isDown) {
-        player.setVelocityX(200);
+        player.setVelocityX(20);
         player.anims.play('walk', true);
         player.flipX = false; // use the original sprite looking to the right
     } else {
