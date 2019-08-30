@@ -1,25 +1,7 @@
-var config = {
-    type: Phaser.CANVAS,
-    parent: 'gameWindow',
-    width: 800,
-    height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: {y: 500},
-            debug: false
-        }
-    },
-    scene: {
-        key: 'main',
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
+//initialize Phaser
+var game = new Phaser.Game(800,600,Phaser.CANVAS,'gameWindow' {preload:preload,create:create});
 
-var game = new Phaser.Game(config);
-
+//set global variables
 var map;
 var player;
 var cursors;
@@ -29,21 +11,20 @@ var score = 0;
 
 function preload() {
     // map made with Tiled in JSON format
-    this.load.tilemapTiledJSON('map', 'assets/map.json');
+    game.load.tilemapTiledJSON('map', 'assets/map.json');
     // tiles in spritesheet 
-    this.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
+    game.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
     // simple coin image
-    this.load.image('coin', 'assets/coinGold.png');
+    game.load.image('coin', 'assets/coinGold.png');
     // cord image
-    this.load.image('cord', 'assets/cord.png');
+    game.load.image('cord', 'assets/cord.png');
     // player animations
-    //this.load.atlas('player', 'assets/player.png', 'assets/player.json');
-    this.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png', {frameWidth: 64, frameHeight: 64});
+    game.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png', {frameWidth: 64, frameHeight: 64});
 }
 
 function create() {
     // load the map 
-    map = this.make.tilemap({key: 'map'});
+    map = game.make.tilemap({key: 'map'});
 
     // tiles for the ground layer
     var groundTiles = map.addTilesetImage('tiles');
@@ -58,11 +39,11 @@ function create() {
     coinLayer = map.createDynamicLayer('Coins', coinTiles, 0, 0);
 
     // set the boundaries of our game world
-    this.physics.world.bounds.width = groundLayer.width;
-    this.physics.world.bounds.height = groundLayer.height;
+    game.physics.world.bounds.width = groundLayer.width;
+    game.physics.world.bounds.height = groundLayer.height;
     
     // create the player sprite    
-    player = this.physics.add.sprite(200, 200, 'player');
+    player = game.physics.add.sprite(200, 200, 'player');
     player.setBounce(0.2); // our player will bounce from items
     player.setCollideWorldBounds(true); // don't go out of the map    
     player.setMass(500);
@@ -71,52 +52,52 @@ function create() {
     player.body.setSize(player.width, player.height-8);
     
     // player will collide with the level tiles 
-    this.physics.add.collider(groundLayer, player);
+    game.physics.add.collider(groundLayer, player);
     
     coinLayer.setTileIndexCallback(17, collectCoin, this);
     // when the player overlaps with a tile with index 17, collectCoin 
     // will be called    
-    this.physics.add.overlap(player, coinLayer);
+    game.physics.add.overlap(player, coinLayer);
 
     // player idle animation
-    this.anims.create({
+    game.anims.create({
         key: 'idle',
-        frames: this.anims.generateFrameNumbers('player',{start:0,end:8,first:8}),
+        frames: game.anims.generateFrameNumbers('player',{start:0,end:8,first:8}),
         frameRate: 10,
     });
     // player walk animation
-    this.anims.create({
+    game.anims.create({
         key: 'walk',
-        frames: this.anims.generateFrameNumbers('player',{start:9,end:12,first:12}),
+        frames: game.anims.generateFrameNumbers('player',{start:9,end:12,first:12}),
         frameRate: 10,
     });
     // player jump animation
-    this.anims.create({
+    game.anims.create({
         key: 'jump',
-        frames: this.anims.generateFrameNumbers('player',{start:20,end:27,first:27}),
+        frames: game.anims.generateFrameNumbers('player',{start:20,end:27,first:27}),
         frameRate: 10,
     });
     // player attack animation
-    this.anims.create({
+    game.anims.create({
         key: 'attack',
-        frames: this.anims.generateFrameNumbers('player',{start:28,end:40,first:28}),
+        frames: game.anims.generateFrameNumbers('player',{start:28,end:40,first:28}),
         frameRate: 10,
     });
 
-    kbCursors = this.input.keyboard.createCursorKeys();
-    kbSpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    kbCursors = game.input.keyboard.createCursorKeys();
+    kbSpace = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     
 
     // set bounds so the camera won't go outside the game world
-    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    game.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     // make the camera follow the player
-    this.cameras.main.startFollow(player);
+    game.cameras.main.startFollow(player);
 
     // set background color, so the sky is not black    
-    this.cameras.main.setBackgroundColor('#ccccff');
+    game.cameras.main.setBackgroundColor('#ccccff');
 
     // this text will show the score
-    text = this.add.text(20, 570, '0', {
+    text = game.add.text(20, 570, '0', {
         fontSize: '20px',
         fill: '#ffffff'
     });
