@@ -65,7 +65,7 @@ function create() {
     // create the player sprite    
     player = this.matter.add.sprite(200, 200, 'player');
     player.setBounce(0.2); // our player will bounce from items
-    player.setCollideWorldBounds(true); // don't go out of the map    
+    //player.setCollideWorldBounds(true); // don't go out of the map    
     player.setMass(500);
     
     // small fix to our player images, we resize the physics body object slightly
