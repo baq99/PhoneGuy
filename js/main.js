@@ -75,7 +75,7 @@ function create() {
     //this.matter.add.collider(groundLayer, player);
 
     //add phone cord
-    y = 150;
+    var y = 150, prev;
     for (var i=0; i<12; i++) {
         var cord = this.matter.add.image(400,y,'cord',null,{shape:'rectangle',mass:0.1});
         this.matter.add.joint(prev,cord,(i===0) ? 90 : 35, 0.4);
