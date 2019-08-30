@@ -79,7 +79,7 @@ function collectCoin(sprite, tile) {
 }
 
 function update() {
-    game.physics.arcade.collide(plater,layer);
+    game.physics.arcade.collide(player,layer);
     
     player.body.velocity.x = 0;
     
