@@ -58,8 +58,8 @@ function create() {
     coinLayer = map.createDynamicLayer('Coins', coinTiles, 0, 0);
 
     // set the boundaries of our game world
-    this.physics.world.bounds.width = groundLayer.width;
-    this.physics.world.bounds.height = groundLayer.height;
+    this.matter.world.bounds.width = groundLayer.width;
+    this.matter.world.bounds.height = groundLayer.height;
 
     // create the player sprite    
     player = this.matter.add.sprite(200, 200, 'player');
@@ -85,7 +85,7 @@ function create() {
     coinLayer.setTileIndexCallback(17, collectCoin, this);
     // when the player overlaps with a tile with index 17, collectCoin 
     // will be called    
-    this.physics.add.overlap(player, coinLayer);
+    this.matter.add.overlap(player, coinLayer);
 
     // player idle animation
     this.anims.create({
