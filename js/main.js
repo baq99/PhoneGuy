@@ -58,9 +58,10 @@ function create() {
     coinLayer = map.createDynamicLayer('Coins', coinTiles, 0, 0);
 
     // set the boundaries of our game world
-    this.matter.world.bounds.width = groundLayer.width;
-    this.matter.world.bounds.height = groundLayer.height;
-
+    //this.physics.world.bounds.width = groundLayer.width;
+    //this.physics.world.bounds.height = groundLayer.height;
+    this.matter.world.setBounds(0,0,groundLayer.width,groundLayer.height);
+    
     // create the player sprite    
     player = this.matter.add.sprite(200, 200, 'player');
     player.setBounce(0.2); // our player will bounce from items
