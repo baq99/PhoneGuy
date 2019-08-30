@@ -11,9 +11,9 @@ var score = 0;
 
 function preload() {
     // map made with Tiled in JSON format
-    game.load.tilemapTiledJSON('map', 'assets/map.json');
+    game.load.tilemap('map', 'assets/map.json',null,Phaser.Tilemap.TILED_JSON);
     // tiles in spritesheet 
-    game.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
+    game.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth:70,frameHeight:70});
     // simple coin image
     game.load.image('coin', 'assets/coinGold.png');
     // cord image
@@ -23,41 +23,28 @@ function preload() {
 }
 
 function create() {
+    //initialise the physics engine
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.stage.backgroundColor = '#ccccff';
     // load the map 
-    map = game.make.tilemap({key: 'map'});
-
+    map = game.add.tilemap('map');
     // tiles for the ground layer
-    var groundTiles = map.addTilesetImage('tiles');
-    // create the ground layer
-    groundLayer = map.createDynamicLayer('World', groundTiles, 0, 0);
+    map.addTilesetImage('tiles','tiles');
     // the player will collide with this layer
-    groundLayer.setCollisionByExclusion([-1]);
-
-    // coin image used as tileset
-    var coinTiles = map.addTilesetImage('coin');
-    // add coins as tiles
-    coinLayer = map.createDynamicLayer('Coins', coinTiles, 0, 0);
-
-    // set the boundaries of our game world
-    game.physics.world.bounds.width = groundLayer.width;
-    game.physics.world.bounds.height = groundLayer.height;
+    map.setCollisionBetween(0,12);
+    // create the ground layer
+    layer = map.createLayer('World');    
+    layer.resizeWorld();
     
     // create the player sprite    
-    player = game.physics.add.sprite(200, 200, 'player');
-    player.setBounce(0.2); // our player will bounce from items
-    player.setCollideWorldBounds(true); // don't go out of the map    
-    player.setMass(500);
-    
-    // small fix to our player images, we resize the physics body object slightly
-    player.body.setSize(player.width, player.height-8);
-    
-    // player will collide with the level tiles 
-    game.physics.add.collider(groundLayer, player);
-    
-    coinLayer.setTileIndexCallback(17, collectCoin, this);
-    // when the player overlaps with a tile with index 17, collectCoin 
-    // will be called    
-    game.physics.add.overlap(player, coinLayer);
+    player = game.add.sprite(200,200,'player');
+    game.physics.enable(player);
+    game.physics.arcade.gravity.y = 250;
+    player.body.bounce.y = 0.2; // our player will bounce from items
+    player.body.linearDamping = 1;
+    player.body.collideWorldBounds = true; // don't go out of the map    
+
+    game.camera.follow(player);
 
     // player idle animation
     game.anims.create({
@@ -86,15 +73,11 @@ function create() {
 
     kbCursors = game.input.keyboard.createCursorKeys();
     kbSpace = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-    
 
     // set bounds so the camera won't go outside the game world
-    game.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    //game.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     // make the camera follow the player
-    game.cameras.main.startFollow(player);
-
-    // set background color, so the sky is not black    
-    game.cameras.main.setBackgroundColor('#ccccff');
+    //game.cameras.main.startFollow(player);
 
     // this text will show the score
     text = game.add.text(20, 570, '0', {
