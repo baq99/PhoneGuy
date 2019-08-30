@@ -145,7 +145,7 @@ function collectCoin(sprite, tile) {
 }
 
 function update(time, delta) {
-    if (kbCursors.up.isDown && player.body.onFloor())  {
+    if (kbCursors.up.isDown && player.onFloor())  {
         player.setVelocityY(-50);        
         player.anims.play('jump', true);
     }
