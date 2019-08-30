@@ -40,7 +40,7 @@ function create() {
     // create the player sprite    
     player = game.add.sprite(200,200,'player');
     game.physics.enable(player);
-    game.physics.arcade.gravity.y = 250;
+    game.physics.arcade.gravity.y = 350;
     player.body.bounce.y = 0.2; // our player will bounce from items
     player.body.linearDamping = 1;
     player.body.collideWorldBounds = true; // don't go out of the map    
@@ -84,19 +84,19 @@ function update() {
     player.body.velocity.x = 0;
     
     if (kbCursors.up.isDown && player.body.onFloor())  {
-        player.body.velocity.y = -200;        
+        player.body.velocity.y = -500;        
         player.play('jump');
     }
     else if (kbSpace.isDown && player.body.onFloor()) {   
         player.play('liftRec', true);
     }    
     else if (kbCursors.left.isDown) {
-        player.body.velocity.x = -150;
+        player.body.velocity.x = -200;
         player.play('walk'); // walk left
         player.flipX = true; // flip the sprite to the left
     }
     else if (kbCursors.right.isDown) {
-        player.body.velocity.x = 150;
+        player.body.velocity.x = 200;
         player.play('walk');
         player.flipX = false; // use the original sprite looking to the right
     } else {
