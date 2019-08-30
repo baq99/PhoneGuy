@@ -54,7 +54,7 @@ function create() {
     player.animations.add('liftRec',[28,29,30,31,32,33,34,35,36,37,38,39,40], spriteFPS, true); //lifting the reciever
 
     kbCursors = game.input.keyboard.createCursorKeys();
-    kbSpace = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    kbSpace = game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
 
     // set bounds so the camera won't go outside the game world
     //game.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
