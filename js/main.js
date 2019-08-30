@@ -62,7 +62,7 @@ function create() {
     //game.cameras.main.startFollow(player);
 
     // this text will show the score
-    text = game.add.text(20, 570, '0', {
+    text = game.add.text(20, 20, '0', {
         fontSize: '20px',
         fill: '#ffffff'
     });
