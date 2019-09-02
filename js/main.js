@@ -91,6 +91,7 @@ function update() {
         player.body.velocity.y = 0;
         player.body.velocity.x = 0;
         player.play('liftRec');
+        console.log("Player pressed SPACE");
     }    
     else if (kbCursors.left.isDown) {
         player.body.velocity.x = -200;
