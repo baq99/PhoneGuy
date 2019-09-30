@@ -36,7 +36,7 @@ function create() {
     // create the ground layer
     worldLayer = map.createLayer('World');
     // create the coin layer
-    coinLayer = map.createLayer('Coins');
+    //coinLayer = map.createLayer('Coins');
     
     worldLayer.resizeWorld();
     
