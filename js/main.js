@@ -12,7 +12,7 @@ var score = 0;
 
 function preload() {
     // map made with Tiled in JSON format
-    game.load.tilemap('map', 'assets/map.json',null,Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map', 'assets/map.json',null,Phaser.Phaser.Tilemap.TILED_JSON);
     // tiles in spritesheet 
     game.load.spritesheet('tiles', 'assets/tiles.png',70,70);
     // simple coin image
@@ -20,7 +20,7 @@ function preload() {
     // cord image
     game.load.image('cord', 'assets/cord.png');
     // player animations
-    game.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png',64,64);
+    game.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png', 64, 64);
 }
 
 function create() {
@@ -41,7 +41,7 @@ function create() {
     player = game.add.sprite(200,200,'player');
     game.physics.enable(player);
     game.physics.arcade.gravity.y = 350;
-    player.body.bounce.y = 0.2; // our player will bounce from items
+    player.body.bounce.y = 0.1; // our player will bounce from items
     player.body.linearDamping = 1;
     player.body.collideWorldBounds = true; // don't go out of the map    
     player.anchor.setTo(.5,1);
@@ -62,10 +62,9 @@ function create() {
     //game.cameras.main.startFollow(player);
 
     // this text will show the score
-    text = game.add.text(20, 20, '0', {
-        fontSize: '20px',
-        fill: '#ffffff'
-    });
+    text = game.add.text(20, 20, '0', {font: 'bold 20px Arial', fill: '#fff'});
+    text.setShadow(3, 3, 'rgba(0,0,0,0.5), 2);
+    
     // fix the text to the camera
     //text.setScrollFactor(0);
 }
