@@ -63,7 +63,7 @@ function create() {
 
     // this text will show the score
     text = game.add.text(20, 20, '0', {font: 'bold 20px Arial', fill: '#fff'});
-    text.setShadow(3, 3, 'rgba(0,0,0,0.5), 2);
+    text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
     
     // fix the text to the camera
     //text.setScrollFactor(0);
