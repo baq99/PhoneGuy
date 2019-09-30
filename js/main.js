@@ -12,7 +12,7 @@ var score = 0;
 
 function preload() {
     // map made with Tiled in JSON format
-    game.load.tilemap('map', 'assets/map.json',null,Phaser.Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map', 'assets/map.json',null, Phaser.Tilemap.TILED_JSON);
     // tiles in spritesheet 
     game.load.spritesheet('tiles', 'assets/tiles.png',70,70);
     // simple coin image
@@ -34,8 +34,11 @@ function create() {
     // the player will collide with this layer  
     map.setCollisionBetween(0,12);
     // create the ground layer
-    layer = map.createLayer('World');    
-    layer.resizeWorld();
+    worldLayer = map.createLayer('World');
+    // create the coin layer
+    coinLayer = map.createLayer('Coins');
+    
+    worldLayer.resizeWorld();
     
     // create the player sprite    
     player = game.add.sprite(200,200,'player');
@@ -78,7 +81,7 @@ function collectCoin(sprite, tile) {
 }
 
 function update() {
-    game.physics.arcade.collide(player,layer);
+    game.physics.arcade.collide(player,worldLayer);
     
     player.body.velocity.x = 0;
     
