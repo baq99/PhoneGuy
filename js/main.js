@@ -1,111 +1,75 @@
-var config = {
-    type: Phaser.CANVAS,
-    parent: 'gameWindow',
-    width: 800,
-    height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: {y: 500},
-            debug: false
-        }
-    },
-    scene: {
-        key: 'main',
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
+//initialize Phaser
+var game = new Phaser.Game(800,600,Phaser.CANVAS,'gameWindow',{preload:preload,create:create,update:update});
 
-var game = new Phaser.Game(config);
-
+//set global variables
 var map;
 var player;
+var spriteFPS = 10;
 var cursors;
-var groundLayer, coinLayer;
+var layer;
 var text;
 var score = 0;
 
 function preload() {
     // map made with Tiled in JSON format
-    this.load.tilemapTiledJSON('map', 'assets/map.json');
+    game.load.tilemap('map', 'assets/map.json',null, Phaser.Tilemap.TILED_JSON);
     // tiles in spritesheet 
-    this.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
+    game.load.spritesheet('tiles', 'assets/tiles.png',70,70);
     // simple coin image
-    this.load.image('coin', 'assets/coinGold.png');
+    game.load.image('coin', 'assets/coinGold.png');
+    // cord image
+    game.load.image('cord', 'assets/cord.png');
     // player animations
-    //this.load.atlas('player', 'assets/player.png', 'assets/player.json');
-    this.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png', {frameWidth: 64, frameHeight: 64});
+    game.load.spritesheet('player', 'assets/PhoneGuyAllAnims.png', 64, 64);
 }
 
 function create() {
+    //initialise the physics engine
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.stage.backgroundColor = '#ccccff';
     // load the map 
-    map = this.make.tilemap({key: 'map'});
-
+    map = game.add.tilemap('map');
     // tiles for the ground layer
-    var groundTiles = map.addTilesetImage('tiles');
+    map.addTilesetImage('tiles','tiles');
+    // the player will collide with this layer  
+    map.setCollisionBetween(0,12);
     // create the ground layer
-    groundLayer = map.createDynamicLayer('World', groundTiles, 0, 0);
-    // the player will collide with this layer
-    groundLayer.setCollisionByExclusion([-1]);
-
-    // coin image used as tileset
-    var coinTiles = map.addTilesetImage('coin');
-    // add coins as tiles
-    coinLayer = map.createDynamicLayer('Coins', coinTiles, 0, 0);
-
-    // set the boundaries of our game world
-    this.physics.world.bounds.width = groundLayer.width;
-    this.physics.world.bounds.height = groundLayer.height;
-
+    worldLayer = map.createLayer('World');
+    // create the coin layer
+    //coinLayer = map.createLayer('Coins');
+    
+    worldLayer.resizeWorld();
+    
     // create the player sprite    
-    player = this.physics.add.sprite(200, 200, 'player');
-    player.setBounce(0.2); // our player will bounce from items
-    player.setCollideWorldBounds(true); // don't go out of the map    
+    player = game.add.sprite(200,200,'player');
+    game.physics.enable(player);
+    game.physics.arcade.gravity.y = 350;
+    player.body.bounce.y = 0.1; // our player will bounce from items
+    player.body.linearDamping = 1;
+    player.body.collideWorldBounds = true; // don't go out of the map    
+    player.anchor.setTo(.5,1);
+    game.camera.follow(player);
     
-    // small fix to our player images, we resize the physics body object slightly
-    player.body.setSize(player.width, player.height-8);
-    
-    // player will collide with the level tiles 
-    this.physics.add.collider(groundLayer, player);
+    //player animations
+    player.animations.add('idle',[0,1,2,3,4,5,6,7,8], spriteFPS, true); //idle
+    player.animations.add('walk',[9,10,11,12], spriteFPS, true); //walking
+    player.animations.add('jump',[20,21,22,23,24,25,26,27], spriteFPS, true); //jumping
+    player.animations.add('liftRec',[28,29,30,31,32,33,34,35,36,37,38,39,40], spriteFPS, true); //lifting the reciever
 
-    coinLayer.setTileIndexCallback(17, collectCoin, this);
-    // when the player overlaps with a tile with index 17, collectCoin 
-    // will be called    
-    this.physics.add.overlap(player, coinLayer);
-
-    // player walk animation
-    this.anims.create({
-        key: 'walk',
-        frames: this.anims.generateFrameNumbers('player',{start:9,end:12,first:12}),
-        frameRate: 10,
-    });
-    // idle with only one frame, so repeat is not neaded
-    this.anims.create({
-        key: 'idle',
-        frames: this.anims.generateFrameNumbers('player',{start:0,end:8,first:8}),
-        frameRate: 10,
-    });
-
-
-    cursors = this.input.keyboard.createCursorKeys();
+    kbCursors = game.input.keyboard.createCursorKeys();
+    kbSpace = game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
 
     // set bounds so the camera won't go outside the game world
-    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    //game.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     // make the camera follow the player
-    this.cameras.main.startFollow(player);
-
-    // set background color, so the sky is not black    
-    this.cameras.main.setBackgroundColor('#ccccff');
+    //game.cameras.main.startFollow(player);
 
     // this text will show the score
-    text = this.add.text(20, 570, '0', {
-        fontSize: '20px',
-        fill: '#ffffff'
-    });
+    text = game.add.text(20, 20, '0', {font: 'bold 20px Arial', fill: '#fff'});
+    text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
+    
     // fix the text to the camera
-    text.setScrollFactor(0);
+    //text.setScrollFactor(0);
 }
 
 // this function will be called when the player touches a coin
@@ -116,25 +80,32 @@ function collectCoin(sprite, tile) {
     return false;
 }
 
-function update(time, delta) {
-    if (cursors.left.isDown)
-    {
-        player.body.setVelocityX(-200);
-        player.anims.play('walk', true); // walk left
-        player.flipX = true; // flip the sprite to the left
+function update() {
+    game.physics.arcade.collide(player,worldLayer);
+    
+    player.body.velocity.x = 0;
+    
+    if (kbCursors.up.isDown && player.body.onFloor())  {
+        player.body.velocity.y = -500;        
+        player.play('jump');
     }
-    else if (cursors.right.isDown)
-    {
-        player.body.setVelocityX(200);
-        player.anims.play('walk', true);
-        player.flipX = false; // use the original sprite looking to the right
+    else if (kbSpace.isDown && player.body.onFloor()) {   
+        player.body.velocity.y = 0;
+        player.body.velocity.x = 0;
+        player.play('liftRec');
+        console.log("Player pressed SPACE");
+    }    
+    else if (kbCursors.left.isDown) {
+        player.body.velocity.x = -200;
+        player.play('walk'); // walk left
+        player.scale.x = -1; // flip the sprite to the left
+    }
+    else if (kbCursors.right.isDown) {
+        player.body.velocity.x = 200;
+        player.play('walk');
+        player.scale.x = 1; // use the original sprite looking to the right
     } else {
-        player.body.setVelocityX(0);
-        player.anims.play('idle', true);
-    }
-    // jump 
-    if (cursors.up.isDown && player.body.onFloor())
-    {
-        player.body.setVelocityY(-500);        
+        player.body.velocity.x = 0;
+        player.play('idle');
     }
 }
